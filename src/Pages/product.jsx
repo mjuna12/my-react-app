@@ -1,4 +1,5 @@
 import CardProduct from "../components/Fragments/CardProducts"
+import Button from "../components/elements/Button"
 
 const products = [
     {
@@ -18,7 +19,18 @@ const products = [
 ]
 
 const ProductsPage = () => {
+    const email = localStorage.getItem('email')
+    const handleLogout = () => {
+        localStorage.removeItem('email')
+        localStorage.removeItem('password')
+        window.location.href = '/login'
+    }
     return (
+        <>
+        <div className="flex justify-end h-20 bg-blue-500 text-white px-10 items-center">
+            <p>{email}</p>
+            <Button color="ml-5 bg-black" onClick={handleLogout}>Logout</Button>
+        </div>
         <div className="flex justify-center py-5">
             {products.map((products)=>{
                 return (
@@ -30,6 +42,7 @@ const ProductsPage = () => {
                 )
             })}
         </div>
+        </>
     )
 }
 export default ProductsPage
