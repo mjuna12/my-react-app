@@ -32,15 +32,15 @@ const ProductsPage = () => {
             <Button color="ml-5 bg-black" onClick={handleLogout}>Logout</Button>
         </div>
         <div className="flex justify-center py-5">
-            {products.map((products)=>{
-                return (
+        <div className="w-3/4">
+        {products.map((products)=>(
                     <CardProduct key={products.id}>
                     <CardProduct.Header image={products.image}/>
                     <CardProduct.Body title={products.name}>{products.description}</CardProduct.Body>
                     <CardProduct.Footer price={`$${products.price}`}/>
                     </CardProduct>
-                )
-            })}
+            ))}
+        </div>
         </div>
         </>
     )
