@@ -2,11 +2,13 @@ import CardProduct from "../components/Fragments/CardProducts"
 import Button from "../components/elements/Button"
 import { useEffect, useRef, useState } from "react"
 import { getProducts } from "../services/product"
+import { getUsername } from "../services/auth"
 
 const ProductsPage = () => {
     const [cart, setCart] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
     const [products, setProducts] = useState([])
+    const [username, setUsername] = useState("")
 
     // Use Effect => Data Langsung berubah
     useEffect(() => {
@@ -31,11 +33,20 @@ const ProductsPage = () => {
     },[])
 
     const handleLogout = () => {
-        localStorage.removeItem('email')
+        localStorage.removeItem('token')
         localStorage.removeItem('password')
         window.location.href = '/login'
     }
-    const email = localStorage.getItem('email')
+    
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token){
+            setUsername(getUsername(token))
+        }else {
+            window.location.href = '/login'
+        }
+        setUsername(getUsername(token))
+    }, [])
 
     const handleAddToCart = (id) => {
         if (cart.find(item => item.id === id)) {
@@ -59,7 +70,7 @@ const ProductsPage = () => {
     return (
         <>
             <div className="flex justify-end h-20 bg-blue-500 text-white px-10 items-center">
-                <p>{email}</p>
+                {username}
                 <Button color="ml-5 bg-black" onClick={handleLogout}>Logout</Button>
             </div>
             <div className="flex justify-center py-5">

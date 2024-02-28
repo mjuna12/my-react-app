@@ -1,29 +1,43 @@
 import InputForm from "../elements/input";
 import Button from "../elements/Button";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getUsername, login } from "../../services/auth";
 
 const Formlogin = () => {
+  const [loginFailed, setloginFailed] = useState()
   const handleLogin = (event) => {
     // Untuk tidak merefresh halaman saat submit form
     event.preventDefault();
-    localStorage.setItem('email', event.target.email.value)
-    localStorage.setItem('password', event.target.password.value)
-    window.location.href = '/products'
-    console.log('login')
+    // localStorage.setItem('email', event.target.email.value)
+    // localStorage.setItem('password', event.target.password.value)
+    // window.location.href = '/products'
+    // console.log('login')
+    const data = {
+      username: event.target.username.value,
+      password: event.target.password.value,
+    }
+    login(data, (status, res)=>{
+      if(status === true){
+        localStorage.setItem('token', res)
+        window.location.href = '/products'
+      } else {
+        setloginFailed(res.response.data)
+      }
+    });
   }
-  const emailRef = useRef(null)
+  const usernameRef = useRef(null)
 
   useEffect(() => {
-    emailRef.current.focus()
+    usernameRef.current.focus()
   }, [])
     return (
           <form onSubmit={handleLogin}>
             <InputForm 
-            label="Email" 
-            name="email" 
-            type="email" 
-            placeholder="example@mail.com" 
-            ref={emailRef }
+            label="Username" 
+            name="username" 
+            type="text" 
+            placeholder="Jhon doe" 
+            ref={usernameRef }
             />
             <InputForm
             label="Password"
@@ -34,6 +48,7 @@ const Formlogin = () => {
             <Button color="bg-blue-500 w-full" type="submit">
               Login
             </Button>
+            {loginFailed && <p className="text-red-500 flex justify-center m-4">{loginFailed}</p>}
           </form>
     )
 
