@@ -68,7 +68,7 @@ const ProductsPage = () => {
                     products.map((products) => (
                         <CardProduct key={products.id}>
                             <CardProduct.Header image={products.image} />
-                            <CardProduct.Body title={products.title}>{products.description}</CardProduct.Body>
+                            <CardProduct.Body name={products.title}>{products.description}</CardProduct.Body>
                             <CardProduct.Footer price={`${(products.price).toLocaleString("id-ID", { styles: "currency", currency: "USD" })}`} handleAddToCart={handleAddToCart} id={products.id} />
                         </CardProduct>
                     ))}

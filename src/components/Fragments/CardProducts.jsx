@@ -17,7 +17,7 @@ const Body = (props) => {
                 {name}
                 </h5>
             <p className="text-medium">
-                {children}
+                {children.substring(0, 100)}...
                 </p>
         </a>
         </div>
@@ -28,7 +28,7 @@ const Footer = (props) => {
     const {price, handleAddToCart, id} = props
     return (
         <div className="flex items-center justify-between px-5 pb-5">
-        <span className="text-xl font-bold">Rp.{" "}
+        <span className="text-xl font-bold">${" "}
         {price}</span>
         <Button color="bg-blue-500" onClick={() => handleAddToCart(id)}>
             Add to Cart

@@ -4,7 +4,7 @@ export const getProducts = (callback) => {
     axios
     .get("https://fakestoreapi.com/products")
     .then((res)=>{
-       callback(res.data)
+    callback(res.data)
     }).catch((error)=>{
         console.log(error)
     })
