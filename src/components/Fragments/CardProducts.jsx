@@ -31,7 +31,7 @@ const Footer = (props) => {
         <span className="text-xl font-bold">Rp.{" "}
         {price}</span>
         <Button color="bg-blue-500" onClick={() => handleAddToCart(id)}>
-            Add to Cart 
+            Add to Cart
         </Button>
     </div>
     )

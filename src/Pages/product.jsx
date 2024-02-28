@@ -22,17 +22,24 @@ const products = [
         price: 40000,
         image: "images/laptop.jpg",
         description: "Description for M1"        
+    },
+    {
+        id: 4,
+        title: "Lenovo Thinkpad",
+        price: 20000,
+        image: "images/laptop.jpg",
+        description: "Description for Lenovo Thinkpad"
     }
 ]
 
 const ProductsPage = () => {
     const [cart, setCart] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
+
     useEffect(() => {
-        setCart(JSON.parse(localStorage.getItem(cart)) || [])
+        setCart(JSON.parse(localStorage.getItem("cart")) || [])
     }, []);
     
-
     useEffect(()=>{
         if (cart.length > 0){
             const sum = cart.reduce((acc, item) => {
