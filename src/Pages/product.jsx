@@ -2,7 +2,6 @@ import CardProduct from "../components/Fragments/CardProducts"
 import Button from "../components/elements/Button"
 import { useEffect, useRef, useState } from "react"
 import { getProducts } from "../services/product"
-import { getUsername } from "../services/auth"
 import { useLogin } from "../hooks/useLogin"
 
 const ProductsPage = () => {
@@ -69,7 +68,7 @@ const ProductsPage = () => {
                     {products.length > 0 &&
                     products.map((products) => (
                         <CardProduct key={products.id}>
-                            <CardProduct.Header image={products.image} />
+                            <CardProduct.Header image={products.image} id={products.id}/>
                             <CardProduct.Body name={products.title}>{products.description}</CardProduct.Body>
                             <CardProduct.Footer price={`${(products.price).toLocaleString("id-ID", { styles: "currency", currency: "USD" })}`} handleAddToCart={handleAddToCart} id={products.id} />
                         </CardProduct>
