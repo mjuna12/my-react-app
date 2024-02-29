@@ -1,14 +1,12 @@
 import CardProduct from "../components/Fragments/CardProducts"
-import Button from "../components/elements/Button"
 import { useEffect, useRef, useState } from "react"
 import { getProducts } from "../services/product"
-import { useLogin } from "../hooks/useLogin"
+import Header from "../components/general/header"
 
 const ProductsPage = () => {
     const [cart, setCart] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
     const [products, setProducts] = useState([])
-    const username = useLogin()
 
     // Use Effect => Data Langsung berubah
     useEffect(() => {
@@ -31,12 +29,6 @@ const ProductsPage = () => {
             setProducts(data)
         })
     },[])
-
-    const handleLogout = () => {
-        localStorage.removeItem('token')
-        localStorage.removeItem('password')
-        window.location.href = '/login'
-    }
     
     const handleAddToCart = (id) => {
         if (cart.find(item => item.id === id)) {
@@ -59,10 +51,7 @@ const ProductsPage = () => {
 
     return (
         <>
-            <div className="flex justify-end h-20 bg-blue-500 text-white px-10 items-center">
-                {username}
-                <Button color="ml-5 bg-black" onClick={handleLogout}>Logout</Button>
-            </div>
+            <Header/>
             <div className="flex justify-center py-5">
                 <div className="w-3/4 flex flex-wrap">
                     {products.length > 0 &&

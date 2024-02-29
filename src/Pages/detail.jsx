@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { getDetailProducts } from "../services/product";
 import { useEffect, useState } from "react";
 import React from "react";
+import Header from "../components/general/header";
 
 const detailPage = () => {
     const { id } = useParams()
@@ -12,8 +13,10 @@ const detailPage = () => {
         })
     }, [id])
     console.log(product)
-    
+
     return (
+        <>
+        <Header />
         <div className="w-100 min-h-screen flex justify-center items-center">
             {Object.keys(product).length > 0 && (
                             <div className="flex font-sans max-w-xl ">
@@ -59,6 +62,7 @@ const detailPage = () => {
                         </div>
             )}
         </div>
+        </>
     )
 }
 
