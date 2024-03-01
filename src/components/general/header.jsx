@@ -1,6 +1,9 @@
 import { useLogin } from "../../hooks/useLogin"
 import Button from "../elements/Button"
 import { Link } from "react-router-dom"
+import { FaCartShopping } from "react-icons/fa6";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Header = () => {
     const handleLogout = () => {
@@ -9,6 +12,15 @@ const Header = () => {
         window.location.href = '/login'
     }
     const username = useLogin()
+    const [totalCart, setTotalCart] = useState(0)
+    const cart = useSelector((state) => state.cart.data);
+    useEffect(()=>{
+        const sum = cart.reduce((acc, item) => {
+            return acc + item.qty;
+        
+        }, 0);
+        setTotalCart(sum);
+    }, [cart])
 
     return (
         <header className="flex items-center justify-between px-10 py-5 bg-blue-500 text-white">
@@ -23,7 +35,16 @@ const Header = () => {
 
                 <div className="flex items-center space-x-2">
                     <span>{username.toUpperCase()}</span>
-                    <Button className="ml-5 bg-black text-white px-4 py-2 rounded" onClick={handleLogout}>Logout</Button>
+                    <Button onClick={handleLogout}>Logout</Button>
+                </div>
+                <div className="flex items-center ml-5">
+                    <FaCartShopping
+                        size={30}
+                        color="white"
+                    />
+                    <div className="absolute bg-red-500 text-xs rounded-full p-1 top-8">
+                        {totalCart  }
+                    </div>
                 </div>
             </nav>
         </header>
