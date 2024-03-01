@@ -5,8 +5,13 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaReact } from "react-icons/fa";
+import { DarkMode } from "../../context/DarkMode";
+import { useContext } from "react";
+import { CiDark } from "react-icons/ci";
+import { CiLight } from "react-icons/ci";
 
 const Header = () => {
+    const {isDarkMode, setIsDarkMode} = useContext(DarkMode);
     const handleLogout = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('password')
@@ -50,6 +55,16 @@ const Header = () => {
                         {totalCart}
                     </div>}
                 </div>
+                <button>
+                <CiDark 
+                size={30}
+                color="white"
+                />
+                <CiLight 
+                size={30}
+                color="white"
+                />
+                </button>
                 <Button onClick={handleLogout}>Logout</Button>
             </nav>
         </header>

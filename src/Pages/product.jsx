@@ -3,9 +3,12 @@ import { useEffect, useRef, useState } from "react"
 import { getProducts } from "../services/product"
 import TableCart from "../components/Fragments/TableCart"
 import Header from "../components/general/header"
+import { DarkMode } from "../context/DarkMode"
+import { useContext } from "react"
 
 const ProductsPage = () => { 
-    const [products, setProducts] = useState([])    
+    const [products, setProducts] = useState([]) 
+    const {isDarkMode, setIsDarkMode} = useContext(DarkMode)   
     // Get Data
     useEffect(()=>{
         getProducts((data)=>{
