@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { FaCartShopping } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { FaReact } from "react-icons/fa";
 
 const Header = () => {
     const handleLogout = () => {
@@ -25,6 +26,9 @@ const Header = () => {
     return (
         <header className="flex items-center justify-between px-10 py-5 bg-blue-500 text-white">
             <div className="flex items-center space-x-2">
+            <FaReact 
+            size={30}
+            />
                 <h1 className="text-lg font-semibold">My React Store</h1>
             </div>
 
@@ -35,17 +39,18 @@ const Header = () => {
 
                 <div className="flex items-center space-x-2">
                     <span>{username.toUpperCase()}</span>
-                    <Button onClick={handleLogout}>Logout</Button>
                 </div>
                 <div className="flex items-center ml-5">
                     <FaCartShopping
                         size={30}
                         color="white"
                     />
+                    {cart.length > 0 && 
                     <div className="absolute bg-red-500 text-xs rounded-full p-1 top-8">
-                        {totalCart  }
-                    </div>
+                        {totalCart}
+                    </div>}
                 </div>
+                <Button onClick={handleLogout}>Logout</Button>
             </nav>
         </header>
     )
