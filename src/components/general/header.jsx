@@ -11,7 +11,7 @@ import { CiDark } from "react-icons/ci";
 import { CiLight } from "react-icons/ci";
 
 const Header = () => {
-    const {isDarkMode, setIsDarkMode} = useContext(DarkMode);
+    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const handleLogout = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('password')
@@ -20,10 +20,10 @@ const Header = () => {
     const username = useLogin()
     const [totalCart, setTotalCart] = useState(0)
     const cart = useSelector((state) => state.cart.data);
-    useEffect(()=>{
+    useEffect(() => {
         const sum = cart.reduce((acc, item) => {
             return acc + item.qty;
-        
+
         }, 0);
         setTotalCart(sum);
     }, [cart])
@@ -31,9 +31,9 @@ const Header = () => {
     return (
         <header className="flex items-center justify-between px-10 py-5 bg-blue-500 text-white">
             <div className="flex items-center space-x-2">
-            <FaReact 
-            size={30}
-            />
+                <FaReact
+                    size={30}
+                />
                 <h1 className="text-lg font-semibold">My React Store</h1>
             </div>
 
@@ -50,20 +50,13 @@ const Header = () => {
                         size={30}
                         color="white"
                     />
-                    {cart.length > 0 && 
-                    <div className="absolute bg-red-500 text-xs rounded-full p-1 top-8">
-                        {totalCart}
-                    </div>}
+                    {cart.length > 0 &&
+                        <div className="absolute bg-red-500 text-xs rounded-full p-1 top-8">
+                            {totalCart}
+                        </div>}
                 </div>
-                <button>
-                <CiDark 
-                size={30}
-                color="white"
-                />
-                <CiLight 
-                size={30}
-                color="white"
-                />
+                <button onClick={() => setIsDarkMode(!isDarkMode)}>
+                    {isDarkMode ? "Light Mode" : "Dark Mode"}
                 </button>
                 <Button onClick={handleLogout}>Logout</Button>
             </nav>
